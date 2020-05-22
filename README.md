@@ -7,6 +7,10 @@ My dotfiles are managed with [GNU stow](https://www.gnu.org/software/stow/).
 3. Install all dotfiles with `stow $(ls -d */)`
 4. Install only bash's dotfiles, for example, with `stow bash`
 
+### Extra installation steps
+#### nvim
+When opening nvim, run `:PlugUpdate` in order to install plugins.
+
 ## Updating
 1. Change into the `.dotfiles` directory
 2. `git pull`
