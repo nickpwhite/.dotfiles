@@ -1,0 +1,9 @@
+AllCops:
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 100
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  ConsistentQuotesInMultiline: true
