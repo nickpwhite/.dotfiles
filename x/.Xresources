@@ -1,0 +1,28 @@
+Xft.dpi: 200
+xterm*eightBitInput: false
+xterm*faceName: Ubuntu Mono
+xterm*faceSize: 14
+xterm*loginShell: true
+xterm*selectToClipboard:true
+xterm*termName: xterm-color
+xterm*background: #262729
+xterm*foreground: #bcc4d1
+xterm*color0: #3e4249
+xterm*color1: #f27a7a
+xterm*color2: #a0bf88
+xterm*color3: #d9b575
+xterm*color4: #75b6e8
+xterm*color5: #d798e9
+xterm*color6: #70bab9
+xterm*color7: #88909f
+xterm*color8: #3e4249
+xterm*color9: #f27a7a
+xterm*color10: #a0bf88
+xterm*color11: #d9b575
+xterm*color12: #75b6e8
+xterm*color13: #d798e9
+xterm*color14: #70bab9
+xterm*color15: #88909f
+xterm*vt100.translations: #override \n\
+  Ctrl Shift <Key> C: copy-selection(CLIPBOARD)  \n\
+  Ctrl Shift <Key> V: insert-selection(CLIPBOARD)
