@@ -32,7 +32,9 @@ set expandtab
 set linebreak
 set list
 set noshowmode
+set number
 set path=.
+set relativenumber
 set scrolloff=7
 set shiftwidth=2
 set smartindent
