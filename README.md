@@ -4,8 +4,9 @@ My dotfiles are managed with [GNU stow](https://www.gnu.org/software/stow/).
 ## Installation
 1. Clone the repository into ~ `git clone git@github.com:nickpwhite/.dotfiles.git`
 2. `cd .dotfiles`
+3. Install only bash's dotfiles, for example, with `stow bash`
+4. Install terminal-only dotfiles with `stow $(ls -d */ | grep -v ^x-)`
 3. Install all dotfiles with `stow $(ls -d */)`
-4. Install only bash's dotfiles, for example, with `stow bash`
 
 ### Extra installation steps
 #### nvim
