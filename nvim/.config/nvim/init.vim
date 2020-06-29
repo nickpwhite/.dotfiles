@@ -44,6 +44,9 @@ set splitright
 set tabstop=2
 set undofile
 
+set textwidth=100
+set nowrap
+
 """
 " Autocmds
 """
