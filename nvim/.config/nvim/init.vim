@@ -24,7 +24,7 @@ set runtimepath+=~/src/fzf
 let &packpath = &runtimepath
 let mapleader = " "
 
-set background=dark
+set background=light
 hi link Whitespace ColorColumn
 
 set clipboard+=unnamedplus
@@ -73,7 +73,7 @@ augroup reload_vimrc
 augroup end
 
 augroup fix_whitespace
-  autocmd FileType ruby,sql autocmd BufWritePre <buffer> %s/\s\+$//e
+  autocmd FileType ruby autocmd BufWritePre <buffer> %s/\s\+$//e
 augroup end
 
 """
@@ -120,6 +120,7 @@ endfun
 augroup db_setup
   autocmd bufread attention.sql let b:db = $ATTENTION_DB
   autocmd bufread bibliography.sql let b:db = $BIBLIOGRAPHY_DB
+  autocmd bufread contacts.sql let b:db = $CONTACTS_DB
   autocmd bufread email.sql let b:db = $EMAIL_DB
   autocmd bufread main.sql let b:db = $MAIN_DB
   autocmd bufread mentions.sql let b:db = $MENTIONS_DB
@@ -152,61 +153,8 @@ map <C-M-p> :Buffers<CR>
 
 " Lightline
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
+      \ 'colorscheme': 'wombat',
       \ }
-
-function! LightlineModified()
-  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightlineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! LightlineFilename()
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? g:lightline.fname :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
-
-function! LightlineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightlineFileencoding()
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
-
-function! LightlineMode()
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
-
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
-let g:vimshell_force_overwrite_statusline = 0
 
 " Neomake
 let g:neomake_javascript_enabled_makers = ['yarn']
