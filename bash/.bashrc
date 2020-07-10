@@ -150,7 +150,7 @@ fi
 
 # Fzf
 if [ -f ~/.config/bash/.fzf.bash ]; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ignore-file .ignore_template'
   . ~/.config/bash/.fzf.bash
 fi
 
