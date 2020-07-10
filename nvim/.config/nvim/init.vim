@@ -14,6 +14,7 @@ call plug#begin(stdpath('config') . '/plug')
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
 call plug#end()
 
