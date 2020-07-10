@@ -16,6 +16,7 @@ call plug#begin(stdpath('config') . '/plug')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
+  Plug 'vimwiki/vimwiki'
 call plug#end()
 
 """
@@ -169,6 +170,11 @@ let g:neomake_yarn_maker = {
       \ 'output_stream': 'stdout',
       \ }
 call neomake#configure#automake('w')
+
+" Vimwiki
+let vimwiki_default = {'path': '~/Documents/vimwiki/src', 'path_html': '~/Documents/vimwiki/out'}
+let vimwiki_legacy = {'path': '~/Documents/notes', 'syntax': 'markdown', 'ext': '.md'}
+let g:vimwiki_list = [vimwiki_default, vimwiki_legacy]
 
 """
 " Language-specific
