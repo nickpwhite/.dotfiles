@@ -205,8 +205,6 @@ exec setxkbmap -option 'caps:escape'
 # TagTime
 exec ~/src/TagTime/tagtimed.pl &
 for_window [title="TagTime"] floating enable
-for_window [title="TagTime"] floating disable
-for_window [title="TagTime"] floating enable
 
 # Monitor configuration
 #workspace "1: chat" output eDP-1
