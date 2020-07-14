@@ -145,6 +145,10 @@ bar {
   }
 }
 
+# change brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
 # change volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list short sinks | grep RUNNING | cut -f1) +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl list short sinks | grep RUNNING | cut -f1) -5%
@@ -205,24 +209,3 @@ exec setxkbmap -option 'caps:escape'
 # TagTime
 exec ~/src/TagTime/tagtimed.pl &
 for_window [title="TagTime"] floating enable
-
-# Monitor configuration
-#workspace "1: chat" output eDP-1
-#workspace "2: music" output eDP-1
-#workspace "3: firefox" output DP-1 eDP-1
-#workspace "4: xterm" output DP-1 eDP-1
-
-## Application layout
-#assign [class="slack"] number "1: chat"
-#assign [class="signal"] number: "1: chat"
-#assign [class="google play music desktop player"] number "2: music"
-#assign [class="Firefox"] number "3: firefox"
-#assign [class="xterm"] number "4: xterm"
-
-## Default applications
-#exec slack
-#exec signal-desktop
-#exec google-play-music-desktop-player
-#exec firefox
-#exec xterm
-#exec xterm
