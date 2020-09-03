@@ -9,6 +9,7 @@ call plug#begin(stdpath('config') . '/plug')
   Plug 'neomake/neomake'
   Plug 'scrooloose/nerdcommenter'
   Plug 'sheerun/vim-polyglot'
+  Plug 'stsewd/fzf-checkout.vim'
   Plug 'Townk/vim-autoclose'
   Plug 'tpope/vim-dadbod'
   Plug 'tpope/vim-fugitive'
@@ -16,6 +17,7 @@ call plug#begin(stdpath('config') . '/plug')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
+  Plug 'vim-test/vim-test'
   Plug 'vimwiki/vimwiki'
 call plug#end()
 
@@ -152,6 +154,7 @@ vmap Q :call Time("DB")<CR>
 " Fzf
 autocmd VimEnter * map <C-p> :Files<CR>
 map <C-M-p> :Buffers<CR>
+map <C-b> :GBranches<CR>
 
 " Lightline
 let g:lightline = {
@@ -175,6 +178,9 @@ call neomake#configure#automake('w')
 let vimwiki_default = {'path': '~/Documents/vimwiki/src', 'path_html': '~/Documents/vimwiki/out'}
 let vimwiki_legacy = {'path': '~/Documents/notes', 'syntax': 'markdown', 'ext': '.md'}
 let g:vimwiki_list = [vimwiki_default, vimwiki_legacy]
+
+" Vim-test
+let test#strategy = "neomake"
 
 """
 " Language-specific
