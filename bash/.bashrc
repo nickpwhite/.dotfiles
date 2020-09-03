@@ -120,6 +120,17 @@ export SCRIPT_DIR="$HOME/.config/i3blocks"
 
 . ~/scripts/z/z.sh
 
+# Ruby
+export PATH="$PATH:$RBENV_ROOT/bin:$RBENV_ROOT/shims"
+eval "$(rbenv init -)"
+
+# Pyenv
+if [ -d ~/.pyenv ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
 # Academia
 if [ -f ~/.config/bash/.academia.bash ]; then
   . ~/.config/bash/.academia.bash
@@ -135,17 +146,6 @@ fi
 # Likelater
 if [ -f ~/.config/bash/likelater.bash ]; then
   . ~/.config/bash/likelater.bash
-fi
-
-# Ruby
-export PATH="$PATH:$RBENV_ROOT/bin:$RBENV_ROOT/shims"
-eval "$(rbenv init -)"
-
-# Pyenv
-if [ -d ~/.pyenv ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
 fi
 
 # Fzf
