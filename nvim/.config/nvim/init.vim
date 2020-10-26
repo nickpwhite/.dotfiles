@@ -101,7 +101,8 @@ nmap <leader>lo :lopen<CR>
 nmap <leader>lc :lclose<CR>
 
 nmap <leader>vimrc :tabe $MYVIMRC<CR>
-nmap <leader>yf :let @+ = expand("%")<CR>
+nmap <leader>yf :let @+ = expand("%:t:r")<CR>
+nmap <leader>yp :let @+ = expand("%")<CR>
 
 nmap <leader>nf :call Interview("nf")<CR>
 nmap <leader>ts :call Interview("ts")<CR>
