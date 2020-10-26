@@ -120,6 +120,13 @@ export SCRIPT_DIR="$HOME/.config/i3blocks"
 
 . ~/scripts/z/z.sh
 
+# Academia
+if [ -f ~/.config/bash/.academia.bash ]; then
+  . ~/.config/bash/.academia.bash
+  . $ACADEMIA_SHELL/academia-shell.sh
+  . ~/.nvm_profile
+fi
+
 # Ruby
 export PATH="$PATH:$RBENV_ROOT/bin:$RBENV_ROOT/shims"
 eval "$(rbenv init -)"
@@ -129,13 +136,6 @@ if [ -d ~/.pyenv ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
-fi
-
-# Academia
-if [ -f ~/.config/bash/.academia.bash ]; then
-  . ~/.config/bash/.academia.bash
-  . $ACADEMIA_SHELL/academia-shell.sh
-  . ~/.nvm_profile
 fi
 
 # Beatnik
