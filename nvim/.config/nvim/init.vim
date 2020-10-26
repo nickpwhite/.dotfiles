@@ -176,9 +176,12 @@ let g:neomake_yarn_maker = {
 call neomake#configure#automake('w')
 
 " Vimwiki
-let vimwiki_default = {'path': '~/Documents/vimwiki/src', 'path_html': '~/Documents/vimwiki/out'}
-let vimwiki_legacy = {'path': '~/Documents/notes', 'syntax': 'markdown', 'ext': '.md'}
-let g:vimwiki_list = [vimwiki_default, vimwiki_legacy]
+let vimwiki_default = {
+  \'path': '~/Documents/notes', 'syntax': 'markdown', 'ext': '.md', 'links_space_char': '_'
+\}
+let g:vimwiki_list = [vimwiki_default]
+let g:vimwiki_markdown_header_style = 0
+let g:vimwiki_auto_header = 1
 
 " Vim-test
 let test#strategy = "neomake"
