@@ -207,7 +207,7 @@ schemes:
       foreground: '#3c3836'
 
     normal:
-      black:   '#fbf1c7'
+      black:   '#3c3836'
       red:     '#cc241d'
       green:   '#98971a'
       yellow:  '#d79921'
