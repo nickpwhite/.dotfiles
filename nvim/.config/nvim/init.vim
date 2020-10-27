@@ -3,13 +3,11 @@
 """
 call plug#begin(stdpath('config') . '/plug')
   Plug 'christoomey/vim-tmux-navigator'
-  Plug 'dbeniamine/todo.txt-vim'
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf.vim'
   Plug 'neomake/neomake'
   Plug 'scrooloose/nerdcommenter'
   Plug 'sheerun/vim-polyglot'
-  Plug 'stsewd/fzf-checkout.vim'
   Plug 'Townk/vim-autoclose'
   Plug 'tpope/vim-dadbod'
   Plug 'tpope/vim-fugitive'
@@ -17,7 +15,6 @@ call plug#begin(stdpath('config') . '/plug')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
-  Plug 'vim-test/vim-test'
   Plug 'vimwiki/vimwiki'
 call plug#end()
 
@@ -155,7 +152,6 @@ vmap Q :call Time("DB")<CR>
 " Fzf
 autocmd VimEnter * map <C-p> :Files<CR>
 map <C-M-p> :Buffers<CR>
-map <C-b> :GBranches<CR>
 
 " Lightline
 let g:lightline = {
@@ -183,22 +179,9 @@ let g:vimwiki_list = [vimwiki_default]
 let g:vimwiki_markdown_header_style = 0
 let g:vimwiki_auto_header = 1
 
-" Vim-test
-let test#strategy = "neomake"
-
 """
 " Language-specific
 """
 
 " Markdown
 let g:vim_markdown_new_list_item_indent = 0
-
-" Todo
-au filetype todo imap <buffer> + +<C-X><C-O>
-au filetype todo imap <buffer> @ @<C-X><C-O>
-au filetype todo setlocal completeopt-=preview
-au filetype todo setlocal completeopt+=menuone
-au filetype todo setlocal omnifunc=todo#Complete
-au BufReadPost todo.txt !drive pull todo.txt
-au BufWritePost todo.txt !drive push todo.txt
-let g:Todo_txt_prefix_creation_date=1
