@@ -104,6 +104,10 @@ nmap <leader>yp :let @+ = expand("%")<CR>
 nmap <leader>nf :call Interview("nf")<CR>
 nmap <leader>ts :call Interview("ts")<CR>
 
+" Convert text to sentence case
+nnoremap <leader>gu :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR> <bar> :noh<CR>
+vnoremap <leader>gu :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR> <bar> :noh<CR>
+
 """
 " Plugin Config
 """
