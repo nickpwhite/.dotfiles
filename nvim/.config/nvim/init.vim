@@ -6,9 +6,9 @@ call plug#begin(stdpath('config') . '/plug')
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf.vim'
   Plug 'neomake/neomake'
-  Plug 'scrooloose/nerdcommenter'
   Plug 'sheerun/vim-polyglot'
   Plug 'Townk/vim-autoclose'
+  Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-dadbod'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
@@ -137,6 +137,7 @@ augroup db_setup
   autocmd bufread redshift.sql let b:db = $REDSHIFT
   autocmd bufread redshift_writable.sql let b:db = $REDSHIFT_WRITABLE
   autocmd bufread qa.sql let b:db = $QA_DB
+  autocmd bufread qa_attention.sql let b:db = $QA_ATTENTION_DB
   autocmd bufread qa_new_notifications.sql let b:db = $QA_NEW_NOTIFICATIONS_DB
   autocmd bufread qa_ring.sql let b:db = $QA_RING_DB
   autocmd bufread qa_redshift.sql let b:db = $QA_REDSHIFT
