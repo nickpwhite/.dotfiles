@@ -110,7 +110,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export EDITOR="/usr/bin/vim"
+export EDITOR="/usr/local/bin/vim"
 export VISUAL="$EDITOR"
 
 export PATH="$PATH:$HOME/scripts:$HOME/.local/bin"
