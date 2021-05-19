@@ -26,7 +26,7 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-shopt -s globstar
+#shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -150,7 +150,13 @@ fi
 [ -f ~/.Xresources ] && command -v xrdb >/dev/null 2>&1 && xrdb -merge ~/.Xresources
 
 stty -ixon
-source /etc/bash_completion.d/git-prompt
+
+if command -v brew &> /dev/null; then
+  . $(brew --prefix)/etc/bash_completion
+else
+  . /etc/bash_completion.d/git-prompt
+fi
+
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -159,7 +165,9 @@ export NVM_DIR="$HOME/.config/nvm"
 export PATH="$PATH:$HOME/go/bin"
 
 # asdf
-export ASDF_CONFIG_FILE=~/.config/asdf
-export ASDF_DATA_DIR=~/src/asdf
-. $ASDF_DATA_DIR/asdf.sh
-. $ASDF_DATA_DIR/completions/asdf.bash
+if [ -f ~/.config/asdf ] && [ -f ~/src/asdf ]; then
+  export ASDF_CONFIG_FILE=~/.config/asdf
+  export ASDF_DATA_DIR=~/src/asdf
+  . $ASDF_DATA_DIR/asdf.sh
+  . $ASDF_DATA_DIR/completions/asdf.bash
+fi
