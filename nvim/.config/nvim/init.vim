@@ -21,11 +21,11 @@ call plug#end()
 """
 " Options
 """
-set runtimepath+=~/src/fzf
+set runtimepath+=/usr/local/Cellar/fzf/0.27.0
 let &packpath = &runtimepath
 let mapleader = " "
 
-set background=light
+set background=dark
 hi link Whitespace ColorColumn
 
 set clipboard+=unnamedplus
