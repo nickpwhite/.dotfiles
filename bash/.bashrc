@@ -115,21 +115,9 @@ export VISUAL="$EDITOR"
 
 export PATH="$PATH:$HOME/scripts:$HOME/.local/bin"
 
-export RBENV_ROOT="$HOME/.rbenv"
 export SCRIPT_DIR="$HOME/.config/i3blocks"
 
 . ~/scripts/z/z.sh
-
-# Ruby
-export PATH="$PATH:$RBENV_ROOT/bin:$RBENV_ROOT/shims"
-eval "$(rbenv init -)"
-
-# Pyenv
-if [ -d ~/.pyenv ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
 
 # Beatnik
 if [ -f ~/.config/bash/beatnik.bash ]; then
@@ -157,15 +145,8 @@ else
   . /etc/bash_completion.d/git-prompt
 fi
 
-
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="$PATH:$HOME/go/bin"
-
 # asdf
-if [ -f ~/.config/asdf ] && [ -f ~/src/asdf ]; then
+if [ -f ~/.config/asdf ] && [ -d ~/src/asdf ]; then
   export ASDF_CONFIG_FILE=~/.config/asdf
   export ASDF_DATA_DIR=~/src/asdf
   . $ASDF_DATA_DIR/asdf.sh

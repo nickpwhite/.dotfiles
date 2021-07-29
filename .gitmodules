@@ -1,3 +1,6 @@
 [submodule "z/scripts/z"]
 	path = z/scripts/z
 	url = git@github.com:rupa/z.git
+[submodule "asdf/src/asdf"]
+	path = asdf/src/asdf
+	url = git@github.com:asdf-vm/asdf.git
