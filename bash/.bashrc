@@ -38,7 +38,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+    xterm-color|*-256color|alacritty) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -67,7 +67,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 if [ "$color_prompt" = yes ]; then
     PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u \[\033[01;95m\]:: \[\033[01;34m\]\w\[\033[00m\]" " % " " \[\033[01;32m\]‹%s\[\033[01;32m\]›\[\033[0m\]"'
 else
-    PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\u :: \w" "% " " ‹%s› "'
+    PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\u :: \w" " % " " ‹%s› "'
 fi
 unset color_prompt force_color_prompt
 
