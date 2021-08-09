@@ -3,13 +3,12 @@
 """
 call plug#begin(stdpath('config') . '/plug')
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'dense-analysis/ale'
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf.vim'
-  Plug 'neomake/neomake'
   Plug 'sheerun/vim-polyglot'
   Plug 'Townk/vim-autoclose'
   Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-dadbod'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-repeat'
@@ -73,19 +72,6 @@ augroup reload_vimrc
   autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup end
 
-augroup fix_whitespace
-  autocmd FileType ruby autocmd BufWritePre <buffer> %s/\s\+$//e
-augroup end
-
-"""
-" Functions
-"""
-function! Interview(type)
-  let date = strftime("%Y_%m_%d")
-  let year = strftime("%Y")
-  exe 'new ' . year . '/' . date . '_' . a:type . '.md'
-endfun
-
 """
 " Maps
 """
@@ -101,9 +87,6 @@ nmap <leader>vimrc :tabe $MYVIMRC<CR>
 nmap <leader>yf :let @+ = expand("%:t:r")<CR>
 nmap <leader>yp :let @+ = expand("%")<CR>
 
-nmap <leader>nf :call Interview("nf")<CR>
-nmap <leader>ts :call Interview("ts")<CR>
-
 " Convert text to sentence case
 nnoremap <leader>gu :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR> <bar> :noh<CR>
 vnoremap <leader>gu :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR> <bar> :noh<CR>
@@ -112,69 +95,65 @@ vnoremap <leader>gu :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR> <bar> :noh<CR>
 " Plugin Config
 """
 
-" Dadbod
-function! Time(cmd) range
-  let starttime = reltime()
-  execute a:firstline . "," . a:lastline . a:cmd
-  let endtime = str2float(reltimestr(reltime(starttime)))
-  redraw!
-  echohl MoreMsg
-  echo printf("%.02g sec", endtime)
-  echohl None
-endfun
+" ALE
+call ale#linter#Define('ruby', {
+  \   'name': 'sorbet-payserver',
+  \   'lsp': 'stdio',
+  \   'executable': 'true',
+  \   'command': 'pay exec scripts/bin/typecheck --lsp',
+  \   'language': 'ruby',
+  \   'project_root': $HOME . '/stripe/pay-server',
+\})
 
-augroup db_setup
-  autocmd bufread attention.sql let b:db = $ATTENTION_DB
-  autocmd bufread bibliography.sql let b:db = $BIBLIOGRAPHY_DB
-  autocmd bufread contacts.sql let b:db = $CONTACTS_DB
-  autocmd bufread email.sql let b:db = $EMAIL_DB
-  autocmd bufread main.sql let b:db = $MAIN_DB
-  autocmd bufread mentions.sql let b:db = $MENTIONS_DB
-  autocmd bufread new_notifications.sql let b:db = $NEW_NOTIFICATIONS_DB
-  autocmd bufread notifications.sql let b:db = $NOTIFICATIONS_DB
-  autocmd bufread ring.sql let b:db = $RING_DB
-  autocmd bufread distribution_system.sql let b:db = $DIST_SYSTEM_DB
-  autocmd bufread redshift.sql let b:db = $REDSHIFT
-  autocmd bufread redshift_writable.sql let b:db = $REDSHIFT_WRITABLE
-  autocmd bufread qa.sql let b:db = $QA_DB
-  autocmd bufread qa_attention.sql let b:db = $QA_ATTENTION_DB
-  autocmd bufread qa_new_notifications.sql let b:db = $QA_NEW_NOTIFICATIONS_DB
-  autocmd bufread qa_ring.sql let b:db = $QA_RING_DB
-  autocmd bufread qa_redshift.sql let b:db = $QA_REDSHIFT
-  autocmd bufread dev.sql let b:db = $DEV_DB
-  autocmd bufread dev_attention.sql let b:db = $DEV_ATTENTION_DB
-  autocmd bufread dev_email.sql let b:db = $DEV_EMAIL_DB
-  autocmd bufread dev_mentions.sql let b:db = $DEV_MENTIONS_DB
-  autocmd bufread dev_payments.sql let b:db = $DEV_PAYMENTS_DB
-  autocmd bufread dev_ring.sql let b:db = $DEV_RING_DB
-  autocmd bufread dev_redshift.sql let b:db = $DEV_REDSHIFT
-  autocmd bufread test_notifications.sql let b:db = $TEST_NOTIFICATIONS_DB
-augroup end
+if !exists("g:ale_linters")
+  let g:ale_linters = {}
+endif
+
+if fnamemodify(getcwd(), ':p') =~ $HOME.'/stripe/pay-server'
+  let g:ale_linters['ruby'] = ['sorbet-payserver', 'rubocop']
+  let g:ale_linters['javascript'] = ['eslint', 'flow-language-server']
+endif
+
+let g:ale_pattern_options_enabled = 1
+let g:ale_pattern_options = {
+  \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
+  \ 'pay-server/docs/content/.*\.md$':
+  \ {
+  \   'ale_linters': ['vale'],
+  \   'ale_markdown_vale_options': '--config ' . $HOME . '/stripe/pay-server/docs/vale/vale.ini',
+  \   'ale_markdown_vale_input_file': '%s',
+  \ }
+\}
+
+let g:ale_fixers = {
+  \ 'javascript': ['eslint'],
+  \ 'ruby': ['rubocop', 'sorbet'],
+\}
+
+let g:ale_fix_on_save = 1
+
+nnoremap <C-]> :ALEGoToDefinition<CR>
 
 nmap Q :call Time(".DB")<CR>
 vmap Q :call Time("DB")<CR>
 
 " Fzf
+function! ToplevelFiles()
+  let dir = systemlist('git rev-parse --show-toplevel')[0]
+
+  exe "Files " . dir
+endfun
+
 autocmd VimEnter * map <C-p> :Files<CR>
-map <C-M-p> :Buffers<CR>
+nnoremap <C-M-p> :call ToplevelFiles()<CR>
+nnoremap <C-b> :Buffers<CR>
+nnoremap <Leader>a :Rg<Space>
+nnoremap <Leader>A :Rg<C-R><C-W><CR>
 
 " Lightline
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
-
-" Neomake
-let g:neomake_javascript_enabled_makers = ['yarn']
-let g:neomake_yarn_maker = {
-      \ 'args': [
-      \   'lint',
-      \   '--format', 'compact'
-      \ ],
-      \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-      \   '%W%f: line %l\, col %c\, Warning - %m, %-G, %-G%*\d problems%#',
-      \ 'output_stream': 'stdout',
-      \ }
-call neomake#configure#automake('w')
 
 " Vimwiki
 let vimwiki_default = {
@@ -183,6 +162,9 @@ let vimwiki_default = {
 let g:vimwiki_list = [vimwiki_default]
 let g:vimwiki_markdown_header_style = 0
 let g:vimwiki_auto_header = 1
+
+nnoremap <Leader>t :VimwikiToggleListItem<CR>
+vnoremap <Leader>t :VimwikiToggleListItem<CR>
 
 """
 " Language-specific
