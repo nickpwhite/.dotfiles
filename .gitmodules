@@ -4,3 +4,9 @@
 [submodule "asdf/src/asdf"]
 	path = asdf/src/asdf
 	url = git@github.com:asdf-vm/asdf.git
+[submodule "x-alacritty/src/alacritty"]
+	path = x-alacritty/src/alacritty
+	url = git@github.com:alacritty/alacritty.git
+[submodule "nvim/src/neovim"]
+	path = nvim/src/neovim
+	url = git@github.com:neovim/neovim.git
