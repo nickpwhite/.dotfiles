@@ -2,7 +2,7 @@
 My dotfiles are managed with [GNU stow](https://www.gnu.org/software/stow/).
 
 ## Installation
-1. Clone the repository into ~ `git clone git@github.com:nickpwhite/.dotfiles.git`
+1. Clone the repository, including submodules 4 at a time `git clone --recurse-submodules -j4 git@github.com:nickpwhite/.dotfiles.git ~/.dotfiles`
 2. `cd .dotfiles`
 3. Install only bash's dotfiles, for example, with `stow bash`
 4. Install terminal-only dotfiles with `stow $(ls -d */ | grep -v ^x-)`
