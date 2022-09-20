@@ -3,9 +3,10 @@
 """
 call plug#begin(stdpath('config') . '/plug')
   Plug 'christoomey/vim-tmux-navigator'
-  Plug 'dense-analysis/ale'
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf.vim'
+  Plug 'mfussenegger/nvim-lint'
+  Plug 'neovim/nvim-lspconfig'
   Plug 'sheerun/vim-polyglot'
   Plug 'Townk/vim-autoclose'
   Plug 'tpope/vim-commentary'
@@ -87,47 +88,8 @@ vnoremap <leader>gu :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR> <bar> :noh<CR>
 " Plugin Config
 """
 
-" ALE
-call ale#linter#Define('ruby', {
-      \   'name': 'sorbet-payserver',
-      \   'lsp': 'stdio',
-      \   'executable': 'true',
-      \   'command': 'pay exec scripts/bin/typecheck --lsp',
-      \   'language': 'ruby',
-      \   'project_root': $HOME . '/stripe/pay-server',
-      \})
-
-if !exists("g:ale_linters")
-  let g:ale_linters = {}
-endif
-
-if fnamemodify(getcwd(), ':p') =~ $HOME.'/stripe/pay-server'
-  let g:ale_linters['ruby'] = ['sorbet-payserver', 'rubocop']
-  let g:ale_linters['javascript'] = ['eslint', 'flow-language-server']
-endif
-
-let g:ale_pattern_options_enabled = 1
-let g:ale_pattern_options = {
-      \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
-      \ 'pay-server/docs/content/.*\.md$':
-      \ {
-        \   'ale_linters': ['vale'],
-        \   'ale_markdown_vale_options': '--config ' . $HOME . '/stripe/pay-server/docs/vale/vale.ini',
-        \   'ale_markdown_vale_input_file': '%s',
-        \ }
-        \}
-
-let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
-      \ 'ruby': ['rubocop', 'sorbet'],
-      \}
-
-let g:ale_fix_on_save = 1
-
-nnoremap <C-]> :ALEGoToDefinition<CR>
-
 " Fzf
-autocmd VimEnter * map <C-p> :GFiles<CR>
+autocmd VimEnter * map <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <Leader>a :Rg<Space>
 nnoremap <Leader>A :Rg<C-R><C-W><CR>
@@ -136,3 +98,6 @@ nnoremap <Leader>A :Rg<C-R><C-W><CR>
 let g:lightline = {
   \'colorscheme': 'wombat',
 \ }
+
+" Lua
+lua require('init')

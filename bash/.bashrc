@@ -140,3 +140,7 @@ if [ -f ~/.config/asdf ] && [ -d ~/src/asdf ]; then
   . $ASDF_DATA_DIR/asdf.sh
   . $ASDF_DATA_DIR/completions/asdf.bash
 fi
+
+if [ -f ~/.config/bash/overlay.bash ]; then
+  . ~/.config/bash/overlay.bash
+fi
