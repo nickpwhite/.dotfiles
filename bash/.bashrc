@@ -59,18 +59,6 @@ fi
 
 . ~/scripts/git-prompt.sh
 
-export GIT_PS1_SHOWCOLORHINTS=true
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWSTASHSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-
-if [ "$color_prompt" = yes ]; then
-    PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u \[\033[01;95m\]:: \[\033[01;34m\]\w\[\033[00m\]" " % " " \[\033[01;32m\]‹%s\[\033[01;32m\]›\[\033[0m\]"'
-else
-    PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\u :: \w" " % " " ‹%s› "'
-fi
-unset color_prompt force_color_prompt
-
 PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
 
 # If this is an xterm set the title to user@host:dir
