@@ -118,9 +118,9 @@ if [ -f ~/.config/bash/likelater.bash ]; then
 fi
 
 # Fzf
-if [ -f ~/.config/bash/.fzf.bash ]; then
+if [ -f ~/.config/bash/fzf.bash ]; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ignore-file .ignore_template'
-  . ~/.config/bash/.fzf.bash
+  . ~/.config/bash/fzf.bash
 fi
 
 [ -f ~/.Xresources ] && command -v xrdb >/dev/null 2>&1 && xrdb -merge ~/.Xresources
