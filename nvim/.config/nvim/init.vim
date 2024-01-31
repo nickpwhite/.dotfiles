@@ -3,12 +3,12 @@
 """
 call plug#begin(stdpath('config') . '/plug')
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'github/copilot.vim', { 'branch': 'release' }
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf.vim'
   Plug 'mfussenegger/nvim-lint'
   Plug 'neovim/nvim-lspconfig'
   Plug 'sheerun/vim-polyglot'
-  Plug 'Townk/vim-autoclose'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
@@ -20,7 +20,7 @@ call plug#end()
 """
 " Options
 """
-set runtimepath+=/opt/homebrew/Cellar/fzf/0.33.0
+set runtimepath+=$HOMEBREW_PREFIX/opt/fzf
 let &packpath = &runtimepath
 let mapleader = " "
 
@@ -28,7 +28,7 @@ set background=light
 hi link Whitespace ColorColumn
 
 set clipboard+=unnamedplus
-set colorcolumn=100
+set colorcolumn=120
 set expandtab
 set linebreak
 set list
@@ -68,14 +68,6 @@ augroup end
 """
 " Maps
 """
-nnoremap j gj
-vnoremap j gj
-nnoremap k gk
-vnoremap k gk
-
-nmap <leader>lo :lopen<CR>
-nmap <leader>lc :lclose<CR>
-
 nmap <leader>vimrc :tabe $MYVIMRC<CR>
 nmap <leader>yf :let @+ = expand("%:t:r")<CR>
 nmap <leader>yp :let @+ = expand("%")<CR>
@@ -100,4 +92,6 @@ let g:lightline = {
 \ }
 
 " Lua
-lua require('init')
+if ! empty(globpath(&rtp, 'plug/*'))
+  lua require('init')
+endif
