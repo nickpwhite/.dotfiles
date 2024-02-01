@@ -98,37 +98,36 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export EDITOR="/usr/local/bin/vim"
-export VISUAL="$EDITOR"
+export PATH="$PATH:~/scripts:~/.local/bin"
 
-export PATH="$PATH:$HOME/scripts:$HOME/.local/bin"
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
 
 export SCRIPT_DIR="$HOME/.config/i3blocks"
 
 . ~/scripts/z/z.sh
 
-# Beatnik
-if [ -f ~/.config/bash/beatnik.bash ]; then
-  . ~/.config/bash/beatnik.bash
-fi
-
-# Likelater
-if [ -f ~/.config/bash/likelater.bash ]; then
-  . ~/.config/bash/likelater.bash
-fi
-
-# Fzf
-if [ -f ~/.config/bash/fzf.bash ]; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ignore-file .ignore_template'
-  . ~/.config/bash/fzf.bash
-fi
-
 [ -f ~/.Xresources ] && command -v xrdb >/dev/null 2>&1 && xrdb -merge ~/.Xresources
 
 stty -ixon
 
-if command -v brew &> /dev/null; then
-  . $(brew --prefix)/etc/bash_completion
+# Homebrew
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+
+if type brew &> /dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+    done
+  fi
 else
   . /etc/bash_completion.d/git-prompt
 fi
@@ -141,6 +140,8 @@ if [ -f ~/.config/asdf ] && [ -d ~/src/asdf ]; then
   . $ASDF_DATA_DIR/completions/asdf.bash
 fi
 
-if [ -f ~/.config/bash/overlay.bash ]; then
-  . ~/.config/bash/overlay.bash
+# Fzf
+if [ -f ~/.config/bash/fzf.bash ]; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ignore-file .ignore_template'
+  . ~/.config/bash/fzf.bash
 fi

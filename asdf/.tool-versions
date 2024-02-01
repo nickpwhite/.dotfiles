@@ -1,2 +1,4 @@
 nodejs lts
-ruby 2.7.5
+ruby 3.2.1
+python 3.11.6
+rust 1.75.0
