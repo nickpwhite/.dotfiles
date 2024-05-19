@@ -24,6 +24,7 @@ set runtimepath+=$HOMEBREW_PREFIX/opt/fzf
 let &packpath = &runtimepath
 let mapleader = " "
 
+colorscheme retrobox
 set background=light
 hi link Whitespace ColorColumn
 
