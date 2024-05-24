@@ -27,4 +27,4 @@ key = "Back"
 mods = "Shift"
 
 [window]
-option_as_alt = "OnlyRight"
+option_as_alt = "OnlyLeft"
