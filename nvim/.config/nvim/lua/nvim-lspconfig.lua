@@ -1,0 +1,68 @@
+local lspconfig = require("lspconfig")
+
+lspconfig.lua_ls.setup({
+  on_init = function(client)
+    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+      runtime = {
+        version = "LuaJIT",
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME,
+        },
+      },
+    })
+  end,
+  settings = {
+    Lua = {},
+  },
+})
+
+lspconfig.rust_analyzer.setup({})
+
+lspconfig.tsserver.setup({})
+
+local augroup = vim.api.nvim_create_augroup("nvim-lspconfig", { clear = true })
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = augroup,
+  callback = function(ev)
+    -- Enable autoformatting
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      callback = function()
+        vim.lsp.buf.format({
+          filter = function(client)
+            return client.name ~= "tsserver" and client.name ~= ""
+          end,
+          async = false,
+        })
+      end,
+      group = augroup,
+    })
+
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      group = augroup,
+      callback = function()
+        vim.diagnostic.open_float(nil, { focus = false })
+      end,
+    })
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<C-s>", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<space>f", function()
+      vim.lsp.buf.format({ async = true })
+    end, opts)
+  end,
+})
