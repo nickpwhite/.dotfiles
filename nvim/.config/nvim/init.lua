@@ -21,7 +21,12 @@ vim.opt.runtimepath:append(vim.env.HOMEBREW_PREFIX .. "/opt/fzf")
 vim.g.mapleader = " "
 
 vim.cmd.colorscheme("retrobox")
-vim.opt.background = "light"
+
+if vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }) == "Dark" then
+  vim.opt.background = "dark"
+else
+  vim.opt.background = "light"
+end
 vim.cmd.highlight({ "link", "Whitespace", "ColorColumn" })
 
 vim.opt.clipboard:append("unnamedplus")
