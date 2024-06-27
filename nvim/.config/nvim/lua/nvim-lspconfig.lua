@@ -6,12 +6,6 @@ lspconfig.lua_ls.setup({
       runtime = {
         version = "LuaJIT",
       },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME,
-        },
-      },
     })
   end,
   settings = {
@@ -29,19 +23,6 @@ local augroup = vim.api.nvim_create_augroup("nvim-lspconfig", { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
   group = augroup,
   callback = function(ev)
-    -- Enable autoformatting
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      callback = function()
-        vim.lsp.buf.format({
-          filter = function(client)
-            return client.name ~= "tsserver" and client.name ~= ""
-          end,
-          async = false,
-        })
-      end,
-      group = augroup,
-    })
-
     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
       group = augroup,
       callback = function()

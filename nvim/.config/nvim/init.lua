@@ -22,7 +22,10 @@ vim.g.mapleader = " "
 
 vim.cmd.colorscheme("retrobox")
 
-if vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }) == "Dark" then
+local system_theme =
+  vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait().stdout:gsub("%s+", "")
+
+if system_theme == "Dark" then
   vim.opt.background = "dark"
 else
   vim.opt.background = "light"
@@ -30,7 +33,7 @@ end
 vim.cmd.highlight({ "link", "Whitespace", "ColorColumn" })
 
 vim.opt.clipboard:append("unnamedplus")
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "100"
 vim.opt.expandtab = true
 vim.opt.linebreak = true
 vim.opt.list = true
@@ -63,14 +66,24 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 -- Mappings
-vim.keymap.set("n", "<Leader>vimrc", "<cmd>tabe $MYVIMRC<cr>", { desc = "Open init.lua in a new tab" })
+vim.keymap.set(
+  "n",
+  "<Leader>vimrc",
+  "<cmd>tabe $MYVIMRC<cr>",
+  { desc = "Open init.lua in a new tab" }
+)
 vim.keymap.set(
   "n",
   "<Leader>yf",
   '<cmd>let @+ = expand("%:t:r")<cr>',
   { desc = "Yank the current filename to the clipboard" }
 )
-vim.keymap.set("n", "<Leader>yp", '<cmd>let @+ = expand("%")<cr>', { desc = "Yank the current path to the clipboard" })
+vim.keymap.set(
+  "n",
+  "<Leader>yp",
+  '<cmd>let @+ = expand("%")<cr>',
+  { desc = "Yank the current path to the clipboard" }
+)
 
 -- Plugin Config
 -- conform.nvim
