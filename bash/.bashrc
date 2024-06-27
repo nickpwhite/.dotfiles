@@ -8,6 +8,21 @@ case $- in
       *) return;;
 esac
 
+# Update path to include local files
+[ "${PATH#*$HOME/scripts:}" == "$PATH" ] && export PATH="$HOME/scripts:$PATH"
+[ "${PATH#*$HOME/.local/bin:}" == "$PATH" ] && export PATH="$HOME/.local/bin:$PATH"
+
+# Update path to include asdf
+if [ -f ~/.config/asdf ] && [ -d ~/src/asdf ]; then
+  export ASDF_CONFIG_FILE=~/.config/asdf
+  export ASDF_DATA_DIR=~/src/asdf
+  . $ASDF_DATA_DIR/asdf.sh
+  . $ASDF_DATA_DIR/completions/asdf.bash
+fi
+
+# Update path to include homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth:erasedups
@@ -98,8 +113,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export PATH="$PATH:~/scripts:~/.local/bin"
-
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
@@ -112,13 +125,6 @@ export SCRIPT_DIR="$HOME/.config/i3blocks"
 stty -ixon
 
 # Homebrew
-export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-export HOMEBREW_REPOSITORY="/opt/homebrew";
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
-export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
-
 if type brew &> /dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
   if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
@@ -130,14 +136,6 @@ if type brew &> /dev/null; then
   fi
 else
   . /etc/bash_completion.d/git-prompt
-fi
-
-# asdf
-if [ -f ~/.config/asdf ] && [ -d ~/src/asdf ]; then
-  export ASDF_CONFIG_FILE=~/.config/asdf
-  export ASDF_DATA_DIR=~/src/asdf
-  . $ASDF_DATA_DIR/asdf.sh
-  . $ASDF_DATA_DIR/completions/asdf.bash
 fi
 
 # Fzf
