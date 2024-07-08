@@ -113,6 +113,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Silence macos bash deprecation warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
