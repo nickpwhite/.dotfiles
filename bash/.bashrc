@@ -12,6 +12,9 @@ esac
 [ "${PATH#*$HOME/scripts:}" == "$PATH" ] && export PATH="$HOME/scripts:$PATH"
 [ "${PATH#*$HOME/.local/bin:}" == "$PATH" ] && export PATH="$HOME/.local/bin:$PATH"
 
+# Update path to include homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Update path to include asdf
 if [ -f ~/.config/asdf ] && [ -d ~/src/asdf ]; then
   export ASDF_CONFIG_FILE=~/.config/asdf
@@ -19,9 +22,6 @@ if [ -f ~/.config/asdf ] && [ -d ~/src/asdf ]; then
   . $ASDF_DATA_DIR/asdf.sh
   . $ASDF_DATA_DIR/completions/asdf.bash
 fi
-
-# Update path to include homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -116,6 +116,7 @@ fi
 # Silence macos bash deprecation warning
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR="nvim"
+export SHELL="/opt/homebrew/bin/bash"
 export VISUAL="$EDITOR"
 
 export SCRIPT_DIR="$HOME/.config/i3blocks"
@@ -129,13 +130,10 @@ stty -ixon
 # Homebrew
 if type brew &> /dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+  [[ -f "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
       [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
-    done
-  fi
+  done
 else
   . /etc/bash_completion.d/git-prompt
 fi

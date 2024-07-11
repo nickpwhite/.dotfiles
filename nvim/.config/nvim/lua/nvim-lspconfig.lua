@@ -17,6 +17,15 @@ lspconfig.rust_analyzer.setup({})
 
 lspconfig.tsserver.setup({})
 
+lspconfig.eslint.setup({
+  on_attach = function(_, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
+
 local augroup = vim.api.nvim_create_augroup("nvim-lspconfig", { clear = true })
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer

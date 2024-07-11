@@ -27,7 +27,7 @@ key = "Back"
 mods = "Shift"
 
 [shell]
-program = "/bin/bash"
+program = "/opt/homebrew/bin/bash"
 
 [window]
 option_as_alt = "OnlyLeft"
