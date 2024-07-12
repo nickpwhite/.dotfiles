@@ -2,6 +2,7 @@
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin")
 Plug("christoomey/vim-tmux-navigator")
+Plug("github/copilot.vim")
 Plug("junegunn/fzf.vim")
 Plug("mfussenegger/nvim-lint")
 Plug("neovim/nvim-lspconfig")
