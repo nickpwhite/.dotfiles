@@ -138,8 +138,17 @@ else
   . /etc/bash_completion.d/git-prompt
 fi
 
+# Update once per week
+export HOMEBREW_AUTO_UPDATE_SECS=604800
+
 # Fzf
 if [ -f ~/.config/bash/fzf.bash ]; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ignore-file .ignore_template'
   . ~/.config/bash/fzf.bash
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/nick/.local/share/google-cloud-sdk/path.bash.inc' ]; then . '/Users/nick/.local/share/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/nick/.local/share/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/nick/.local/share/google-cloud-sdk/completion.bash.inc'; fi
