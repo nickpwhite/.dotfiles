@@ -10,3 +10,6 @@
 [submodule "nvim/src/neovim"]
 	path = nvim/src/neovim
 	url = git@github.com:neovim/neovim.git
+[submodule "tmux/.config/tmux/plugins/tpm"]
+	path = tmux/.config/tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git
