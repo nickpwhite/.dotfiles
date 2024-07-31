@@ -54,7 +54,33 @@ inherit-env-vars = true  # If you don't touch "exec" section,
 PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 
 [workspace-to-monitor-force-assignment]
-A = 'secondary'
+# All letters on monitor 2
+A = 2
+B = 2
+C = 2
+D = 2
+E = 2
+F = 2
+G = 2
+H = 2
+I = 2
+J = 2
+K = 2
+L = 2
+M = 2
+N = 2
+O = 2
+P = 2
+Q = 2
+R = 2
+S = 2
+T = 2
+U = 2
+V = 2
+W = 2
+X = 2
+Y = 2
+Z = 2
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

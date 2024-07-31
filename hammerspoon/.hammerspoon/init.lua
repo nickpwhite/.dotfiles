@@ -68,3 +68,14 @@ end
 assert(
   hs.distributednotifications.new(themeChangedCallback, "AppleInterfaceThemeChangedNotification")
 ):start()
+
+local function mapCmdTab(event)
+  local flags = event:getFlags()
+  local chars = event:getCharacters()
+  if chars == "\t" and flags:containExactly({ "cmd" }) then
+    return true
+  elseif chars == string.char(25) and flags:containExactly({ "cmd", "shift" }) then
+    return true
+  end
+end
+hs.eventtap.new({ hs.eventtap.event.types.keyDown }, mapCmdTab):start()
