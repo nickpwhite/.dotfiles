@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+name = Nick White
+email = nick@nickwhite.co
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[help]
+	autocorrect = 20
