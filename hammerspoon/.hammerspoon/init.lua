@@ -65,9 +65,10 @@ local function themeChangedCallback()
   reloadNvimConfig()
 end
 
-assert(
+ThemeChangeWatcher = assert(
   hs.distributednotifications.new(themeChangedCallback, "AppleInterfaceThemeChangedNotification")
-):start()
+)
+ThemeChangeWatcher:start()
 
 local function mapCmdTab(event)
   local flags = event:getFlags()
@@ -78,4 +79,5 @@ local function mapCmdTab(event)
     return true
   end
 end
-hs.eventtap.new({ hs.eventtap.event.types.keyDown }, mapCmdTab):start()
+CmdTabEventTap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, mapCmdTab)
+CmdTabEventTap:start()
