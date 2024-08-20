@@ -10,3 +10,5 @@ email = nick@nickwhite.co
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [help]
 	autocorrect = 20
+[merge]
+	tool = nvimdiff
