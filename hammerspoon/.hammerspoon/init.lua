@@ -1,6 +1,6 @@
 hs.loadSpoon("EmmyLua")
 
-local function reloadConfig(files)
+function ReloadConfig(files)
   local doReload = false
   for _, file in pairs(files) do
     if file:sub(-4) == ".lua" then
@@ -11,9 +11,10 @@ local function reloadConfig(files)
     hs.reload()
   end
 end
-hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+ConfigPathWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", ReloadConfig)
+ConfigPathWatcher:start()
 
-local function setAlacrittyTheme(theme)
+function SetAlacrittyTheme(theme)
   local path = os.getenv("HOME") .. "/.config/alacritty/alacritty.toml"
   local content = nil
   local file = io.open(path, "r")
@@ -39,7 +40,7 @@ local function setAlacrittyTheme(theme)
   end
 end
 
-local function reloadNvimConfig()
+function ReloadNvimConfig()
   local mp = require("MessagePack")
   local message = mp.pack({ 0, 0, "nvim_command", { "luafile $MYVIMRC" } })
 
@@ -54,23 +55,23 @@ local function reloadNvimConfig()
   end
 end
 
-local function themeChangedCallback()
+function ThemeChangedCallback()
   local appearance = hs.host.interfaceStyle() or "Light"
   if appearance == "Light" then
-    setAlacrittyTheme("light")
+    SetAlacrittyTheme("light")
   else
-    setAlacrittyTheme("dark")
+    SetAlacrittyTheme("dark")
   end
 
-  reloadNvimConfig()
+  ReloadNvimConfig()
 end
 
 ThemeChangeWatcher = assert(
-  hs.distributednotifications.new(themeChangedCallback, "AppleInterfaceThemeChangedNotification")
+  hs.distributednotifications.new(ThemeChangedCallback, "AppleInterfaceThemeChangedNotification")
 )
 ThemeChangeWatcher:start()
 
-local function mapCmdTab(event)
+function MapCmdTab(event)
   local flags = event:getFlags()
   local chars = event:getCharacters()
   if chars == "\t" and flags:containExactly({ "cmd" }) then
@@ -79,5 +80,5 @@ local function mapCmdTab(event)
     return true
   end
 end
-CmdTabEventTap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, mapCmdTab)
+CmdTabEventTap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, MapCmdTab)
 CmdTabEventTap:start()
