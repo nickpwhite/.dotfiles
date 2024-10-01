@@ -21,23 +21,6 @@ local augroup = vim.api.nvim_create_augroup("nvim-lspconfig", { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
   group = augroup,
   callback = function(ev)
-    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-      group = augroup,
-      callback = function()
-        vim.diagnostic.open_float({
-          scope = "cursor",
-          focusable = false,
-          close_events = {
-            "CursorMoved",
-            "CursorMovedI",
-            "BufHidden",
-            "InsertCharPre",
-            "WinLeave",
-          },
-        })
-      end,
-    })
-
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
@@ -53,5 +36,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<space>f", function()
       vim.lsp.buf.format({ async = true })
     end, opts)
+    vim.keymap.set("n", "<space>d", function()
+      vim.diagnostic.open_float({
+        scope = "cursor",
+        focusable = false,
+        close_events = {
+          "CursorMoved",
+          "CursorMovedI",
+          "BufHidden",
+          "InsertCharPre",
+          "WinLeave",
+        },
+      })
+    end)
   end,
 })
