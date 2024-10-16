@@ -11,6 +11,7 @@ Plug("nvim-telescope/telescope.nvim", { tag = "0.1.8" })
 Plug("nvim-telescope/telescope-fzf-native.nvim", {
   ["do"] = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 })
+Plug("nvim-treesitter/nvim-treesitter")
 Plug("nickpwhite/vim-polyglot")
 Plug("stevearc/conform.nvim")
 Plug("tpope/vim-commentary")
@@ -114,7 +115,12 @@ require("conform").setup({
 
 -- telescope.nvim
 require("telescope").setup()
-vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+vim.keymap.set(
+  "n",
+  "<C-p>",
+  "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>",
+  { desc = "Find files" }
+)
 vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
 vim.keymap.set("n", "<C-f>", "<cmd>Telescope live_grep<cr>", { desc = "Grep the codebase" })
 

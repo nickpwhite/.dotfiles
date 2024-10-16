@@ -4,7 +4,7 @@ lspconfig.lua_ls.setup({})
 
 lspconfig.rust_analyzer.setup({})
 
-lspconfig.tsserver.setup({})
+lspconfig.ts_ls.setup({})
 
 lspconfig.eslint.setup({
   on_attach = function(_, bufnr)
