@@ -101,9 +101,12 @@ require("conform").setup({
     typescript = { "prettier" },
     typescriptreact = { "prettier" },
   },
-  format_on_save = {
-    lsp_format = "fallback",
-  },
+  format_on_save = function(bufnr)
+    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+      return
+    end
+    return { lsp_format = "fallback" }
+  end,
 })
 -- fzf.vim
 vim.keymap.set("n", "<C-p>", "<cmd>Files<cr>", { desc = "Execute fzf :Files" })
