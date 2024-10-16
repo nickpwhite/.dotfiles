@@ -3,10 +3,14 @@ local Plug = vim.fn["plug#"]
 vim.call("plug#begin")
 Plug("christoomey/vim-tmux-navigator")
 Plug("github/copilot.vim")
-Plug("junegunn/fzf.vim")
 Plug("mfussenegger/nvim-lint")
 Plug("neovim/nvim-lspconfig")
+Plug("nvim-lua/plenary.nvim")
 Plug("nvim-lualine/lualine.nvim")
+Plug("nvim-telescope/telescope.nvim", { tag = "0.1.8" })
+Plug("nvim-telescope/telescope-fzf-native.nvim", {
+  ["do"] = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+})
 Plug("nickpwhite/vim-polyglot")
 Plug("stevearc/conform.nvim")
 Plug("tpope/vim-commentary")
@@ -18,7 +22,6 @@ Plug("tpope/vim-surround")
 vim.call("plug#end")
 
 -- Options
-vim.opt.runtimepath:append(vim.env.HOMEBREW_PREFIX .. "/opt/fzf")
 vim.g.mapleader = " "
 
 vim.cmd.colorscheme("retrobox")
@@ -108,9 +111,12 @@ require("conform").setup({
     return { lsp_format = "fallback" }
   end,
 })
--- fzf.vim
-vim.keymap.set("n", "<C-p>", "<cmd>Files<cr>", { desc = "Execute fzf :Files" })
-vim.keymap.set("n", "<C-b>", "<cmd>Buffers<cr>", { desc = "Execute fzf :Buffers" })
+
+-- telescope.nvim
+require("telescope").setup()
+vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
+vim.keymap.set("n", "<C-f>", "<cmd>Telescope live_grep<cr>", { desc = "Grep the codebase" })
 
 -- lualine.nvim
 require("lualine").setup({
