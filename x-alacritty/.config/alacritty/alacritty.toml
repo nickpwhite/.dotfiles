@@ -21,10 +21,11 @@ style = "Italic"
 family = "Monaspace Neon"
 style = "Regular"
 
-[[keyboard.bindings]]
-chars = "\u007F"
-key = "Back"
-mods = "Shift"
+[keyboard]
+bindings = [
+  { chars = "\u007F", key = "Back", mods = "Shift" },
+  { action = "ReceiveChar", key = "T", mods = "Command" },
+]
 
 [shell]
 program = "/opt/homebrew/bin/bash"
