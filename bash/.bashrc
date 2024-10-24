@@ -152,3 +152,7 @@ if [ -f '/Users/nick/.local/share/google-cloud-sdk/path.bash.inc' ]; then . '/Us
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/nick/.local/share/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/nick/.local/share/google-cloud-sdk/completion.bash.inc'; fi
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools
