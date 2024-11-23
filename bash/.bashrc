@@ -21,6 +21,8 @@ if [ -f ~/.config/asdf ] && [ -d ~/src/asdf ]; then
   export ASDF_DATA_DIR=~/src/asdf
   . $ASDF_DATA_DIR/asdf.sh
   . $ASDF_DATA_DIR/completions/asdf.bash
+
+  export PATH="$PATH:$ASDF_DATA_DIR/installs/rust/stable/bin"
 fi
 
 # don't put duplicate lines or lines starting with space in the history.
