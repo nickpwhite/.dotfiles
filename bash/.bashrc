@@ -158,3 +158,4 @@ if [ -f '/Users/nick/.local/share/google-cloud-sdk/completion.bash.inc' ]; then 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools
+export PATH=$PATH:/Library/Apple/usr/bin
