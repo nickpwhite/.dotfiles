@@ -30,6 +30,7 @@ bindings = [
 
 [terminal.shell]
 program = "/opt/homebrew/bin/bash"
+args = ["--login"]
 
 [window]
 option_as_alt = "OnlyLeft"
