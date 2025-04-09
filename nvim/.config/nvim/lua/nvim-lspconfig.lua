@@ -1,5 +1,7 @@
 local lspconfig = require("lspconfig")
 
+lspconfig.kotlin_language_server.setup({})
+
 lspconfig.lua_ls.setup({})
 
 lspconfig.rust_analyzer.setup({})

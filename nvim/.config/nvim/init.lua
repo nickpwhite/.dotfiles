@@ -101,6 +101,7 @@ require("conform").setup({
   },
   formatters_by_ft = {
     lua = { "stylua" },
+    sql = { "pg_format" },
     typescript = { "prettier" },
     typescriptreact = { "prettier" },
   },
@@ -124,10 +125,27 @@ vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { desc = "Find buffer
 vim.keymap.set("n", "<C-f>", "<cmd>Telescope live_grep<cr>", { desc = "Grep the codebase" })
 
 -- lualine.nvim
+local function trunc(trunc_width, trunc_len)
+  return function(str)
+    local win_width = vim.api.nvim_win_get_width(0)
+    if trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
+      return str:sub(1, trunc_len) .. "…"
+    end
+    return str
+  end
+end
+
 require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_b = {
+      {
+        "branch",
+        fmt = trunc(200, 25),
+      },
+      "diff",
+      "diagnostics",
+    },
     lualine_c = { { "filename", path = 1 } },
     lualine_x = { "encoding", "filetype" },
     lualine_y = { "progress" },
