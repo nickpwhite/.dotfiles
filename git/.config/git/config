@@ -12,3 +12,5 @@ email = nick@nickwhite.co
 	autocorrect = 20
 [merge]
 	tool = nvimdiff
+[push]
+	autoSetupRemote = true
