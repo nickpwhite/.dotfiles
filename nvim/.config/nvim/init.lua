@@ -1,8 +1,11 @@
+if vim.g.vscode then
+  require("init-vscode")
+  return
+end
 -- Plugins
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin")
 Plug("christoomey/vim-tmux-navigator")
-Plug("github/copilot.vim")
 Plug("mfussenegger/nvim-lint")
 Plug("neovim/nvim-lspconfig")
 Plug("nvim-lua/plenary.nvim")
@@ -54,7 +57,6 @@ vim.opt.splitright = true
 vim.opt.tabstop = 2
 vim.opt.undofile = true
 
-vim.opt.textwidth = 100
 vim.opt.wrap = false
 
 -- Autocmds

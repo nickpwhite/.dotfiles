@@ -161,5 +161,4 @@ export ANDROID_NDK=$ANDROID_HOME/ndk/26.1.10909125
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools
 export PATH=$PATH:/Library/Apple/usr/bin
 
-# Added by Windsurf
-export PATH="/Users/nick/.codeium/windsurf/bin:$PATH"
+. ~/.config/secrets

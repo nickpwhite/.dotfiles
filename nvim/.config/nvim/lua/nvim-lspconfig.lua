@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<space>d", function()
       vim.diagnostic.open_float({
         scope = "cursor",
-        focusable = false,
+        focusable = true,
         close_events = {
           "CursorMoved",
           "CursorMovedI",
