@@ -6,14 +6,6 @@ vim.lsp.enable("rust_analyzer")
 
 vim.lsp.enable("ts_ls")
 
-vim.lsp.config("eslint", {
-  on_attach = function(_, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-})
 vim.lsp.enable("eslint")
 
 local augroup = vim.api.nvim_create_augroup("lsp", { clear = true })
