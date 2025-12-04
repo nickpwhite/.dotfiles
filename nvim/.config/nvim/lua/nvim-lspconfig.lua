@@ -1,14 +1,12 @@
-local lspconfig = require("lspconfig")
+vim.lsp.enable("kotlin_language_server")
 
-lspconfig.kotlin_language_server.setup({})
+vim.lsp.enable("lua_ls")
 
-lspconfig.lua_ls.setup({})
+vim.lsp.enable("rust_analyzer")
 
-lspconfig.rust_analyzer.setup({})
+vim.lsp.enable("ts_ls")
 
-lspconfig.ts_ls.setup({})
-
-lspconfig.eslint.setup({
+vim.lsp.config("eslint", {
   on_attach = function(_, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
@@ -16,8 +14,9 @@ lspconfig.eslint.setup({
     })
   end,
 })
+vim.lsp.enable("eslint")
 
-local augroup = vim.api.nvim_create_augroup("nvim-lspconfig", { clear = true })
+local augroup = vim.api.nvim_create_augroup("lsp", { clear = true })
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {

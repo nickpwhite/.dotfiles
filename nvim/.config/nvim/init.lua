@@ -6,6 +6,7 @@ end
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin")
 Plug("christoomey/vim-tmux-navigator")
+Plug("github/copilot.vim")
 Plug("mfussenegger/nvim-lint")
 Plug("neovim/nvim-lspconfig")
 Plug("nvim-lua/plenary.nvim")
