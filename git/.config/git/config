@@ -23,8 +23,8 @@ email = nick@nickwhite.co
 			[ \"$b\" = \"$base\" ] && continue; \
 			git config --get branch.$b.remote >/dev/null || continue; \
 			git rev-parse --quiet --verify \"$b@{upstream}\" >/dev/null || { \
-			echo \"Deleting $b (upstream gone)\"; git branch -D \"$b\"; continue; git worktree remove \"../$b\" }; \
+			echo \"Deleting $b (upstream gone)\"; git worktree remove \"../$b\"; git branch -D \"$b\"; continue; }; \
 			git cherry -v \"origin/$base\" \"$b\" | grep -q '^+' || { \
-			echo \"Deleting $b (already merged)\"; git branch -d \"$b\"; git worktree remove \"../$b\" }; \
+			echo \"Deleting $b (already merged)\"; git worktree remove \"../$b\"; git branch -d \"$b\"; }; \
 		done; \
 		}; f"

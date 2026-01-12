@@ -32,7 +32,7 @@ vim.g.mapleader = " "
 vim.cmd.colorscheme("retrobox")
 
 local system_theme =
-    vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait().stdout:gsub("%s+", "")
+  vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait().stdout:gsub("%s+", "")
 
 if system_theme == "Dark" then
   vim.opt.background = "dark"
@@ -112,7 +112,7 @@ require("conform").setup({
     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
       return
     end
-    return { lsp_format = "last" }
+    return { lsp_format = "fallback" }
   end,
 })
 
