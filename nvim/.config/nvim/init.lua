@@ -11,7 +11,7 @@ Plug("mfussenegger/nvim-lint")
 Plug("neovim/nvim-lspconfig")
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-lualine/lualine.nvim")
-Plug("nvim-telescope/telescope.nvim", { tag = "0.1.8" })
+Plug("nvim-telescope/telescope.nvim", { tag = "*" })
 Plug("nvim-telescope/telescope-fzf-native.nvim", {
   ["do"] = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 })
