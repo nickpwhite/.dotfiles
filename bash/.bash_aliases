@@ -1,5 +1,5 @@
 alias l='ls -lahF'
 alias tmux='tmux -2'
-alias bconfig='vim $HOME/.bashrc'
-alias breload='. $HOME/.bashrc'
+alias bconfig='vim $HOME/.bash_profile'
+alias breload='. $HOME/.bash_profile'
 alias vim='nvim'

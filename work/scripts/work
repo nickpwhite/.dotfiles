@@ -12,7 +12,7 @@ directory_name="../$branch_name"
 if [[ ! -d "$directory_name" ]]; then
   git worktree add -b "$branch_name" "$directory_name"
   if [[ -f apps/web/.env.local ]]; then
-    ln -s apps/web/.env.local "$directory_name/apps/web/"
+    ln -s "$(pwd)/apps/web/.env.local" "$directory_name/apps/web/.env.local"
   fi
 fi
 pushd "$directory_name" > /dev/null
