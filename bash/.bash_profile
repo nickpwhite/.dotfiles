@@ -8,6 +8,8 @@ case $- in
       *) return;;
 esac
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Update path to include local files
 [ "${PATH#*$HOME/scripts:}" == "$PATH" ] && export PATH="$HOME/scripts:$PATH"
 [ "${PATH#*$HOME/.local/bin:}" == "$PATH" ] && export PATH="$HOME/.local/bin:$PATH"
