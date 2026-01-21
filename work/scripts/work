@@ -18,8 +18,14 @@ fi
 pushd "$directory_name" > /dev/null
 npm install
 popd > /dev/null
-tmux new-window -c "$directory_name" -n "$branch_name" nvim
-tmux split-window -h -l 55 -c "$directory_name" opencode
+tmux new-window -c "$directory_name" -n "$branch_name" \
+  bash -lc 'nvim; exec "${SHELL:-/bin/bash}" -l'
+
+tmux split-window -h -l 55 -c "$directory_name" \
+  bash -lc 'opencode; exec "${SHELL:-/bin/bash}" -l'
+
 tmux select-pane -L
-tmux split-window -v -l 20 -c "$directory_name" npm run dev
+
+tmux split-window -v -l 20 -c "$directory_name" \
+  bash -lc 'npm run dev; exec "${SHELL:-/bin/bash}" -l'
 tmux split-window -h -c "$directory_name"
