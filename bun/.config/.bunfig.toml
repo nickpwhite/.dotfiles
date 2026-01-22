@@ -1,0 +1,9 @@
+[install]
+globalDir = "/Users/nick/.local/share/bun/install/global"
+globalBinDir = "/Users/nick/.local/bin"
+
+[install.cache]
+dir = "/Users/nick/.cache/bun/install/cache"
+
+[install.lockfile]
+save = false

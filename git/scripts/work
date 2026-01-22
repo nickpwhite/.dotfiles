@@ -16,7 +16,7 @@ if [[ ! -d "$directory_name" ]]; then
   fi
 fi
 pushd "$directory_name" > /dev/null
-npm install
+bun install
 popd > /dev/null
 tmux new-window -c "$directory_name" -n "$branch_name" \
   bash -lc 'nvim; exec "${SHELL:-/bin/bash}" -l'
