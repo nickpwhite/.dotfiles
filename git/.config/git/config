@@ -43,3 +43,4 @@ email = nick@nickwhite.co
 			echo \"Deleting $b (already merged)\"; delete_branch \"$b\"; }; \
 		done; \
 		}; f"
+	begin = "!f() { \"$HOME/scripts/work\" \"$@\"; }; f"
