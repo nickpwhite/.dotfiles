@@ -104,6 +104,7 @@ require("conform").setup({
   },
   formatters_by_ft = {
     lua = { "stylua" },
+    ruby = { "rubyfmt" },
     sql = { "pg_format" },
     typescript = { "prettier" },
     typescriptreact = { "prettier" },
