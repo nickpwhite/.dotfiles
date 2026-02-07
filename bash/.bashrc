@@ -10,6 +10,11 @@ esac
 
 umask 002
 
+# Update path to include Android SDK tools
+if [ -d ~/.local/share/android-sdk/cmdline-tools/latest/bin ]; then
+  export PATH="$PATH:$HOME/.local/share/android-sdk/cmdline-tools/latest/bin"
+fi
+
 # Update path to include local files
 [ "${PATH#*$HOME/scripts:}" == "$PATH" ] && export PATH="$HOME/scripts:$PATH"
 [ "${PATH#*$HOME/.local/bin:}" == "$PATH" ] && export PATH="$HOME/.local/bin:$PATH"
@@ -169,3 +174,7 @@ export PATH=$PATH:/Library/Apple/usr/bin
 if [ -f "$HOME/.config/secrets" ]; then
   . ~/.config/secrets
 fi
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.bash 2>/dev/null || :

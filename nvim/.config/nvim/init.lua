@@ -7,7 +7,6 @@ local Plug = vim.fn["plug#"]
 vim.call("plug#begin")
 Plug("christoomey/vim-tmux-navigator")
 Plug("github/copilot.vim")
-Plug("mfussenegger/nvim-lint")
 Plug("neovim/nvim-lspconfig")
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-lualine/lualine.nvim")
@@ -158,6 +157,16 @@ require("lualine").setup({
 })
 
 -- lsp
+vim.lsp.config("eslint", {
+  root_markers = { ".git" },
+  settings = {
+    run = "onSave",
+  },
+  flags = {
+    debounce_text_changes = 500,
+  },
+})
+
 vim.lsp.enable("kotlin_language_server")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("rust_analyzer")
